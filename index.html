@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eis in Bremen - Beste Eisdielen in Bremen</title>
+    <meta name="description" content="Die top Eisdielen in Bremen übersichtlich auf einer Karte">
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/stylefonts.css">
+
+</head>
+<body>
+
+    <div class="text-center py-8" id="topbar">
+        <!--<img style="width: 200px; margin-left: auto; margin-right: auto; margin-top: 20px;" src="img/icecream.png" alt="">-->
+        <h1><span style="color: #F69753;">Eis</span> <span style="color: #FA6678;">in</span> <span style="color: #73c3ba;">Bremen</span></h1>
+        <h2>Top Eisdielen in Bremen</h2>
+    </div>
+    
+
+    <div id="mapbox">
+        <div id="map"></div>
+    </div>
+    
+
+    <script>
+        function initMap(){
+
+            var options = {
+                center: { lat: 53.0736, lng: 8.8064 },
+                zoom: 13,
+                styles:
+                            // style generated with the google maps style wizard
+
+                            [
+                    {
+                        "elementType": "geometry",
+                        "stylers": [
+                        {
+                            "color": "#ebe3cd"
+                        }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                        {
+                            "color": "#523735"
+                        }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.text.stroke",
+                        "stylers": [
+                        {
+                            "color": "#f5f1e6"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                        {
+                            "color": "#c9b2a6"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative.land_parcel",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                        {
+                            "color": "#dcd2be"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative.land_parcel",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                        {
+                            "color": "#ae9e90"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "landscape.natural",
+                        "elementType": "geometry",
+                        "stylers": [
+                        {
+                            "color": "#dfd2ae"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "geometry",
+                        "stylers": [
+                        {
+                            "color": "#dfd2ae"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                        {
+                            "color": "#93817c"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.attraction",
+                        "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.business",
+                        "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.government",
+                        "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.medical",
+                        "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.park",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                        {
+                            "color": "#a5b076"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.park",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                        {
+                            "color": "#447530"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.place_of_worship",
+                        "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.school",
+                        "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.sports_complex",
+                        "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "road",
+                        "elementType": "geometry",
+                        "stylers": [
+                        {
+                            "color": "#f5f1e6"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "road.arterial",
+                        "elementType": "geometry",
+                        "stylers": [
+                        {
+                            "color": "#fdfcf8"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry",
+                        "stylers": [
+                        {
+                            "color": "#f8c967"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                        {
+                            "color": "#e9bc62"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway.controlled_access",
+                        "elementType": "geometry",
+                        "stylers": [
+                        {
+                            "color": "#e98d58"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway.controlled_access",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                        {
+                            "color": "#db8555"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "road.local",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                        {
+                            "color": "#806b63"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "transit.line",
+                        "elementType": "geometry",
+                        "stylers": [
+                        {
+                            "color": "#dfd2ae"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "transit.line",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                        {
+                            "color": "#8f7d77"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "transit.line",
+                        "elementType": "labels.text.stroke",
+                        "stylers": [
+                        {
+                            "color": "#ebe3cd"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "transit.station",
+                        "elementType": "geometry",
+                        "stylers": [
+                        {
+                            "color": "#dfd2ae"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "water",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                        {
+                            "color": "#b9d3c2"
+                        }
+                        ]
+                    },
+                    {
+                        "featureType": "water",
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                        {
+                            "color": "#92998d"
+                        }
+                        ]
+                    }
+                ]
+            }
+
+            // new map
+            var map = new google.maps.Map(document.getElementById("map"), options);
+
+            var image = {
+            url: 'https://eis-in-bremen.crejado.de/ice.png',
+            size: new google.maps.Size(140, 140),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(70, 70)
+            };
+
+            addMarker({
+                coords:{lat: 53.0823, lng: 8.7923},
+                content: '<h3>Eis Molin | Wachmannstraße 41</h3>'
+            });
+
+            addMarker({
+                coords:{lat: 53.084080, lng: 8.815120},
+                content: '<h3>Eiscafe Patera | Willy-Brand-Platz 1</h3>'
+            });
+
+            addMarker({
+                coords:{lat: 53.092999, lng: 8.803300},
+                content: '<h3>Cercena | Hemmstraße 124</h3>'
+            });
+
+            addMarker({
+                coords:{lat: 53.095630, lng: 8.786650},
+                content: '<h3>Eis Cafe Dolomiten | Vegesacker Str.7</h3>'
+            });
+
+            // Add Marker Function
+            function addMarker(props){
+                var marker = new google.maps.Marker({
+                    position: props.coords,
+                    map:map,
+                    icon: image
+                });
+                // Info window
+                if(props.content){
+                        var infoWindow = new google.maps.InfoWindow({
+                        content:props.content
+                    });
+
+                    // event listener to show the info window when clicking on marker
+                    marker.addListener('click', function(){
+                    infoWindow.open(map, marker);
+                    });
+                }
+            }
+
+        }   
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEY"
+    type="text/javascript"></script>
+</body>
+</html>
